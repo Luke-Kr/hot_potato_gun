@@ -1,0 +1,28 @@
+{
+  "Title": "Hot Potato Gun",
+  "Type": "addon",
+  "Org": "smartmario",
+  "Ident": "hot_potato_gun",
+  "Tags": null,
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "Resources": null,
+  "MenuResources": null,
+  "HasCode": true,
+  "CodePath": "/code/",
+  "PackageReferences": [
+    "thieves.terrortown",
+    "smartmario.ttt_sm1minigames"
+  ],
+  "EditorReferences": null,
+  "Metadata": {
+    "CsProjName": "",
+    "PrimaryAsset": "",
+    "PhysicsMins": "-1,-1,-1",
+    "PhysicsMaxs": "1,1,1",
+    "RenderMins": "-1,-1,-1",
+    "RenderMaxs": "-1,-1,-1",
+    "ParentPackage": "thieves.terrortown"
+  }
+}

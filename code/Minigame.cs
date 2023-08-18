@@ -17,6 +17,15 @@ namespace HPGMinigame {
             return aliveclients.ElementAt(randomindex).Pawn as TerrorTown.Player;
         }
 
+        [Event("Player.PreTakeDamage")]
+        public static void PreTakeDamage(DamageInfo info, TerrorTown.Player ply)
+        {
+            if (info.Attacker is TerrorTown.Player)
+            {
+                ply.PendingDamage.Damage = 0;
+            }
+        }
+
         public override void RoundStart()
         {
             base.RoundStart();

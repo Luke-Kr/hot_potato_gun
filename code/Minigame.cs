@@ -9,7 +9,7 @@ namespace HPGMinigame {
     public partial class HotPotatoGunMinigame : Minigame
     {
         public override string Name { get; set; } = "Hot Potato Gun";
-        public override string Description { get; set; } = "Wouldn't recommend holding it for longer than 30 seconds";
+        public override string Description { get; set; } = "Wouldn't recommend holding it for longer than 30 seconds..\r\n(PvP is disabled)";
         public static TerrorTown.Player GetAlivePlayer()
         {
             var aliveclients = Game.Clients.Where(x => x.Pawn is TerrorTown.Player ply && ply.LifeState == LifeState.Alive && !x.IsBot);
@@ -18,11 +18,14 @@ namespace HPGMinigame {
         }
 
         [Event("Player.PreTakeDamage")]
-        public static void PreTakeDamage(DamageInfo info, TerrorTown.Player ply)
+        public void PreTakeDamage(DamageInfo info, TerrorTown.Player ply)
         {
-            if (info.Attacker is TerrorTown.Player)
+            if (IsActive)
             {
-                ply.PendingDamage.Damage = 0;
+                if (info.Attacker is TerrorTown.Player)
+                {
+                    ply.PendingDamage.Damage = 0;
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TerrorTown;
 
@@ -16,11 +17,13 @@ namespace Sandbox.Weapons
         public override bool Automatic => false;
         private RealTimeSince HotTimer { get; set; }
         private Sound Ticker { get; set; }
+        private List<TerrorTown.Player> KnownVictim { get; set; }
   
         public HotPotatoGun()
         {
             Droppable = false;
             HotTimer = 0;
+            KnownVictim = new List<TerrorTown.Player>();
         }
         public override void Spawn()
         {
@@ -58,7 +61,11 @@ namespace Sandbox.Weapons
                 {
                     TerrorTown.Player ply = Owner as TerrorTown.Player;
                     ply.Inventory.Items.Remove(this);
-                    HotTimer = Math.Min((int)HotTimer, 25);
+                    if (!KnownVictim.Contains(victim))
+                    {
+                        KnownVictim.Add(victim);
+                        HotTimer = Math.Min((int)HotTimer, 25);
+                    }
                     victim.Inventory.AddItem(this);
                     SetHotPotatoGunActive(victim, this);
                 }
@@ -104,6 +111,7 @@ namespace Sandbox.Weapons
                     victim?.Inventory.AddItem(this);
                     HotTimer = 0;
                     SetHotPotatoGunActive(victim, this);
+                    KnownVictim = new List<TerrorTown.Player>();
                 }
             }
         }

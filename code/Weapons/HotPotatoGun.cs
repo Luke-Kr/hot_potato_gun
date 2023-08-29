@@ -89,6 +89,7 @@ namespace Sandbox.Weapons
         {
             if (HotTimer > 30)
             {
+                var OwnerPreExplode = Owner;
                 var exploder = new ExplosionEntity();
                 exploder.Damage = 200f;
                 exploder.Position = Owner.Position;
@@ -96,6 +97,11 @@ namespace Sandbox.Weapons
                 exploder.RemoveOnExplode = true;
                 exploder.Explode(null);
                 HotTimer = 0;
+                if (OwnerPreExplode == Owner)
+                {
+                    Owner.TakeDamage(new DamageInfo { Damage = 25f });
+                }
+                
             }
         }
 
